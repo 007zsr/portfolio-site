@@ -2,21 +2,23 @@
 import Layout from '../components/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import { t, type Locale } from '../lib/i18n';
-import { publicProjects } from '../lib/projects';
+import { getProjectsContent, getSeoMeta } from '../lib/content-api';
+import type { Locale } from '../lib/i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
+const content = getProjectsContent(locale);
+const seo = getSeoMeta('projects', locale);
 ---
 
-<Layout locale={locale} title={t(locale, 'nav.projects')} description={t(locale, 'page.projects.desc')}>
+<Layout locale={locale} title={seo.title} description={seo.description}>
   <section class="page-section">
-    <SectionTitle eyebrow={t(locale, 'nav.projects')} title={t(locale, 'page.projects.title')} description={t(locale, 'page.projects.desc')} />
+    <SectionTitle eyebrow={content.eyebrow} title={content.title} description={content.description} />
     <div class="project-grid">
-      {publicProjects.map((project) => <ProjectCard project={project} locale={locale} />)}
+      {content.projects.map((project) => <ProjectCard project={project} />)}
     </div>
   </section>
 </Layout>

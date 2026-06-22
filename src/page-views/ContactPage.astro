@@ -1,38 +1,29 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import profile from '../data/profile.json';
-import { t, type Locale } from '../lib/i18n';
-import { siteConfig } from '../lib/site';
+import { getContactContent, getSeoMeta } from '../lib/content-api';
+import type { Locale } from '../lib/i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const contacts = [
-  { label: 'Email', value: profile.contact.email, href: `mailto:${profile.contact.email}` },
-  { label: 'GitHub', value: profile.contact.github, href: profile.contact.github },
-  { label: 'LinkedIn', value: 'Placeholder', href: profile.contact.linkedin },
-  { label: locale === 'zh' ? '网站' : 'Website', value: siteConfig.temporaryUrl, href: siteConfig.temporaryUrl }
-];
+const contact = getContactContent(locale);
+const seo = getSeoMeta('contact', locale);
 ---
 
-<Layout locale={locale} title={t(locale, 'nav.contact')} description={t(locale, 'page.contact.desc')}>
+<Layout locale={locale} title={seo.title} description={seo.description}>
   <section class="page-section">
-    <SectionTitle eyebrow={t(locale, 'nav.contact')} title={t(locale, 'page.contact.title')} description={t(locale, 'page.contact.desc')} />
+    <SectionTitle eyebrow={contact.eyebrow} title={contact.title} description={contact.description} />
     <div class="grid two">
       {
-        contacts.map((item) => (
+        contact.items.map((item) => (
           <article class="contact-card">
             <h3>{item.label}</h3>
-            {
-              item.href === '#' ? (
-                <p>{item.value}</p>
-              ) : (
-                <a class="inline-link" href={item.href}>{item.value}</a>
-              )
-            }
+            <a class="inline-link" href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined}>
+              {item.value}
+            </a>
           </article>
         ))
       }

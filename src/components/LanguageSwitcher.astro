@@ -1,5 +1,6 @@
 ---
-import { alternateLocalePath, t, type Locale } from '../lib/i18n';
+import { getLocalizedPath } from '../lib/content-api';
+import { t, type Locale } from '../lib/i18n';
 
 interface Props {
   locale: Locale;
@@ -7,7 +8,8 @@ interface Props {
 }
 
 const { locale, pathname } = Astro.props;
-const targetPath = alternateLocalePath(pathname);
+const targetLocale = locale === 'zh' ? 'en' : 'zh';
+const targetPath = getLocalizedPath(pathname, targetLocale);
 ---
 
 <a class="language-switcher" href={targetPath}>{t(locale, 'language.switch')}</a>

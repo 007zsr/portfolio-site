@@ -1,22 +1,24 @@
 ---
-import { t, type Locale } from '../lib/i18n';
-import { siteName } from '../lib/site';
+import { getFooterContent } from '../lib/content-api';
+import type { Locale } from '../lib/i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const year = new Date().getFullYear();
+const footer = getFooterContent(locale);
 ---
 
 <footer class="site-footer">
   <div>
-    <strong>{siteName(locale)}</strong>
-    <p>{t(locale, 'footer.description')}</p>
+    <strong>{footer.siteName}</strong>
+    <p>{footer.description}</p>
   </div>
   <div class="footer-meta">
-    <span>© {year} Sirui Zhou</span>
-    <span>{t(locale, 'footer.built')}</span>
+    <div class="footer-links">
+      {footer.links.map((link) => <a class="inline-link" href={link.href}>{link.label}</a>)}
+    </div>
+    <span>© {footer.year} Sirui Zhou</span>
   </div>
 </footer>

@@ -1,34 +1,43 @@
 ---
-import { localePath, t, type Locale } from '../lib/i18n';
-import { localizeProject, type Project } from '../lib/projects';
+import type { ProjectSummary } from '../types/content';
 import StatusBadge from './StatusBadge.astro';
 import TechTag from './TechTag.astro';
 
 interface Props {
-  project: Project;
-  locale: Locale;
+  project: ProjectSummary;
   compact?: boolean;
 }
 
-const { project, locale, compact = false } = Astro.props;
-const localizedProject = localizeProject(project, locale);
-const projectHref = localePath(`/projects/${project.slug}`, locale);
+const { project, compact = false } = Astro.props;
+const techLimit = compact ? 4 : 6;
 ---
 
 <article class:list={['project-card', { compact }]}>
-  <a class="project-media" href={projectHref} aria-label={localizedProject.title}>
-    <img src={project.image} alt={localizedProject.imageAlt} loading="lazy" />
-  </a>
+  <div class="project-media">
+    <img src={project.image} alt={project.imageAlt} loading="lazy" />
+  </div>
   <div class="project-card-body">
     <div class="project-card-topline">
-      <span>{localizedProject.category}</span>
-      <StatusBadge status={localizedProject.status} />
+      <span>{project.category} · {project.year}</span>
+      <StatusBadge status={project.status} />
     </div>
-    <h3><a href={projectHref}>{localizedProject.title}</a></h3>
-    <p>{localizedProject.summary}</p>
-    <div class="tag-list" aria-label={`${localizedProject.title} technologies`}>
-      {project.technologies.slice(0, compact ? 4 : 6).map((tech) => <TechTag label={tech} />)}
+    <h3>{project.title}</h3>
+    <p>{project.summary}</p>
+    <div class="tag-list" aria-label={project.technologiesLabel}>
+      {project.technologies.slice(0, techLimit).map((tech) => <TechTag label={tech} />)}
     </div>
-    <a class="inline-link" href={projectHref}>{t(locale, 'button.viewProject')}</a>
+    {
+      project.links.length > 0 && (
+        <div class="project-card-actions">
+          {
+            project.links.map((link) => (
+              <a class="inline-link" href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      )
+    }
   </div>
 </article>

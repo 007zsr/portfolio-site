@@ -1,8 +1,10 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { getLocaleFromPath, htmlLang, localePath, type Locale } from '../lib/i18n';
-import { absoluteUrl, pageTitle, siteConfig, siteDescription, siteName } from '../lib/site';
+import { getLocaleFromPath, htmlLang, type Locale } from '../lib/i18n';
+import { getLocalizedPath, getSeoMeta } from '../lib/content-api';
+import { getRouteKeyFromPath } from '../lib/routes';
+import { absoluteUrl, pageTitle, siteConfig, siteName } from '../lib/site';
 import '../styles/global.css';
 
 interface Props {
@@ -16,16 +18,19 @@ interface Props {
 const {
   title,
   locale = getLocaleFromPath(Astro.url.pathname),
-  description = siteDescription(locale),
-  image = siteConfig.defaultImage,
+  description,
+  image,
   type = 'website'
 } = Astro.props;
 
+const routeKey = getRouteKeyFromPath(Astro.url.pathname);
+const seo = getSeoMeta(routeKey, locale);
 const canonicalUrl = absoluteUrl(Astro.url.pathname);
-const resolvedTitle = pageTitle(title, locale);
-const ogImage = absoluteUrl(image);
+const resolvedTitle = pageTitle(title ?? seo.title, locale);
+const resolvedDescription = description ?? seo.description;
+const ogImage = absoluteUrl(image ?? seo.image);
 const alternateLocale = locale === 'zh' ? 'en' : 'zh';
-const alternatePath = localePath(Astro.url.pathname, alternateLocale);
+const alternatePath = getLocalizedPath(Astro.url.pathname, alternateLocale);
 ---
 
 <!doctype html>
@@ -35,7 +40,7 @@ const alternatePath = localePath(Astro.url.pathname, alternateLocale);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <title>{resolvedTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={resolvedDescription} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang={htmlLang(locale)} href={canonicalUrl} />
     <link rel="alternate" hreflang={htmlLang(alternateLocale)} href={absoluteUrl(alternatePath)} />
@@ -43,13 +48,13 @@ const alternatePath = localePath(Astro.url.pathname, alternateLocale);
     <meta property="og:locale" content={siteConfig.ogLocale[locale]} />
     <meta property="og:site_name" content={siteName(locale)} />
     <meta property="og:title" content={resolvedTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={resolvedTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
