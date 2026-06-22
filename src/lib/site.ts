@@ -7,5 +7,5 @@ export function absoluteUrl(path = '/') {
 }
 
 export function pageTitle(title?: string) {
-  return title ? `${title} | ${siteConfig.siteName}` : siteConfig.siteName;
+  return title ? `${title} | ${siteConfig.shortName}` : siteConfig.siteName;
 }

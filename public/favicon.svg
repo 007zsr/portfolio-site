@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SZ">
-  <rect width="64" height="64" rx="10" fill="#080a0d"/>
-  <path d="M15 21h30L20 43h30" fill="none" stroke="#36d8ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M49 18v28" stroke="#a78bfa" stroke-width="5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ZSR365">
+  <rect width="64" height="64" rx="12" fill="#080a0d"/>
+  <rect x="5" y="5" width="54" height="54" rx="9" fill="#101820" stroke="#36d8ff" stroke-width="2"/>
+  <path d="M17 19h20L18 37h21" fill="none" stroke="#f3f7fa" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M41 18c6 0 9 3 9 7s-3 7-9 7h-3" fill="none" stroke="#36d8ff" stroke-width="4" stroke-linecap="round"/>
+  <text x="32" y="51" fill="#a78bfa" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="800" text-anchor="middle">365</text>
 </svg>
