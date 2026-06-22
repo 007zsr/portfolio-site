@@ -1,0 +1,70 @@
+---
+import ArticleCard from '../components/ArticleCard.astro';
+import Layout from '../components/Layout.astro';
+import LinkCard from '../components/LinkCard.astro';
+import PaperCard from '../components/PaperCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { publicArticles } from '../lib/articles';
+import { publicLinks, publicPapers, publicVideos, type ContentKind } from '../lib/contentItems';
+import { t, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  kind: 'articles' | ContentKind;
+}
+
+const { locale, kind } = Astro.props;
+const titleKey = `page.${kind}.title`;
+const descKey = `page.${kind}.desc`;
+---
+
+<Layout locale={locale} title={t(locale, `nav.${kind}`)} description={t(locale, descKey)}>
+  <section class="page-section">
+    <SectionTitle eyebrow={t(locale, `nav.${kind}`)} title={t(locale, titleKey)} description={t(locale, descKey)} />
+    {
+      kind === 'articles' && (
+        publicArticles.length > 0 ? (
+          <div class="grid two">
+            {publicArticles.map((article) => <ArticleCard article={article} locale={locale} />)}
+          </div>
+        ) : (
+          <p class="empty-state">{t(locale, 'common.noContent')}</p>
+        )
+      )
+    }
+    {
+      kind === 'papers' && (
+        publicPapers.length > 0 ? (
+          <div class="grid two">
+            {publicPapers.map((paper) => <PaperCard paper={paper} locale={locale} />)}
+          </div>
+        ) : (
+          <p class="empty-state">{t(locale, 'common.noContent')}</p>
+        )
+      )
+    }
+    {
+      kind === 'videos' && (
+        publicVideos.length > 0 ? (
+          <div class="grid two">
+            {publicVideos.map((video) => <VideoCard video={video} locale={locale} />)}
+          </div>
+        ) : (
+          <p class="empty-state">{t(locale, 'common.noContent')}</p>
+        )
+      )
+    }
+    {
+      kind === 'links' && (
+        publicLinks.length > 0 ? (
+          <div class="grid two">
+            {publicLinks.map((link) => <LinkCard link={link} locale={locale} />)}
+          </div>
+        ) : (
+          <p class="empty-state">{t(locale, 'common.noContent')}</p>
+        )
+      )
+    }
+  </section>
+</Layout>

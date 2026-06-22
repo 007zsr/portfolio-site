@@ -1,3 +1,6 @@
+import projectLocales from '../data/projectLocales.json';
+import { pick, t, type Locale } from './i18n';
+
 export type ProjectLink = {
   label: string;
   url: string;
@@ -80,4 +83,24 @@ export function getProjectBySlug(slug: string) {
 
 export function getProjectById(id: string) {
   return publicProjects.find((project) => project.id === id);
+}
+
+export function localizeProject(project: Project, locale: Locale) {
+  const text = projectLocales[project.id as keyof typeof projectLocales] as
+    | (typeof projectLocales)[keyof typeof projectLocales]
+    | undefined;
+  const optionalText = text as typeof text & { imageAlt?: string | Record<Locale, string> };
+
+  return {
+    ...project,
+    title: pick(text?.title ?? project.title, locale),
+    category: pick(text?.category ?? project.category, locale),
+    status: t(locale, `status.${project.status}`),
+    role: pick(text?.role ?? project.role, locale),
+    summary: pick(text?.summary ?? project.summary, locale),
+    responsibilities: (text?.responsibilities?.[locale] ?? project.responsibilities) as string[],
+    features: (text?.features?.[locale] ?? project.features) as string[],
+    outcomes: (text?.outcomes?.[locale] ?? project.outcomes) as string[],
+    imageAlt: pick(optionalText?.imageAlt ?? project.imageAlt, locale)
+  };
 }

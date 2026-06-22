@@ -1,0 +1,95 @@
+---
+import ArticleCard from '../components/ArticleCard.astro';
+import Layout from '../components/Layout.astro';
+import PaperCard from '../components/PaperCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import TechTag from '../components/TechTag.astro';
+import VideoCard from '../components/VideoCard.astro';
+import profile from '../data/profile.json';
+import skills from '../data/skills.json';
+import { featuredArticles } from '../lib/articles';
+import { featuredPapers, featuredVideos } from '../lib/contentItems';
+import { localePath, pick, t, type Locale } from '../lib/i18n';
+import { featuredProjects } from '../lib/projects';
+import { siteConfig } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const heroStyle = `--hero-image: url('${siteConfig.defaultImage}')`;
+const focusTags = skills.flatMap((group) => group.items).slice(0, 10);
+---
+
+<Layout locale={locale}>
+  <section class="hero" style={heroStyle}>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">{t(locale, 'page.home.eyebrow')}</p>
+        <h1>{profile.name}</h1>
+        <p>{pick(profile.headline, locale)}</p>
+        <div class="tag-list" aria-label="Technical focus areas">
+          {focusTags.map((tag) => <TechTag label={tag} />)}
+        </div>
+        <div class="hero-actions">
+          <a class="button" href={localePath('/projects', locale)}>{t(locale, 'button.viewProject')}</a>
+          <a class="button secondary" href="/files/resume-placeholder.pdf">{t(locale, 'button.download')}</a>
+          <a class="button secondary" href={profile.contact.github}>{t(locale, 'button.github')}</a>
+          <a class="button secondary" href={localePath('/contact', locale)}>{t(locale, 'button.contact')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <SectionTitle
+      eyebrow="Featured"
+      title={t(locale, 'page.home.featured')}
+      description={t(locale, 'page.home.featuredDesc')}
+    />
+    <div class="project-grid">
+      {featuredProjects.map((project) => <ProjectCard project={project} locale={locale} compact />)}
+    </div>
+  </section>
+
+  <section class="page-section tight">
+    <SectionTitle title={t(locale, 'page.home.recentArticles')} />
+    {
+      featuredArticles.length > 0 ? (
+        <div class="grid two">
+          {featuredArticles.slice(0, 2).map((article) => <ArticleCard article={article} locale={locale} />)}
+        </div>
+      ) : (
+        <p class="empty-state">{t(locale, 'common.noContent')}</p>
+      )
+    }
+  </section>
+
+  <section class="page-section tight">
+    <SectionTitle title={t(locale, 'page.home.featuredPapers')} />
+    {
+      featuredPapers.length > 0 ? (
+        <div class="grid two">
+          {featuredPapers.slice(0, 2).map((paper) => <PaperCard paper={paper} locale={locale} />)}
+        </div>
+      ) : (
+        <p class="empty-state">{t(locale, 'common.noContent')}</p>
+      )
+    }
+  </section>
+
+  <section class="page-section tight">
+    <SectionTitle title={t(locale, 'page.home.featuredVideos')} />
+    {
+      featuredVideos.length > 0 ? (
+        <div class="grid two">
+          {featuredVideos.slice(0, 2).map((video) => <VideoCard video={video} locale={locale} />)}
+        </div>
+      ) : (
+        <p class="empty-state">{t(locale, 'common.noContent')}</p>
+      )
+    }
+  </section>
+</Layout>

@@ -1,0 +1,22 @@
+---
+import Layout from '../components/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { t, type Locale } from '../lib/i18n';
+import { publicProjects } from '../lib/projects';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<Layout locale={locale} title={t(locale, 'nav.projects')} description={t(locale, 'page.projects.desc')}>
+  <section class="page-section">
+    <SectionTitle eyebrow={t(locale, 'nav.projects')} title={t(locale, 'page.projects.title')} description={t(locale, 'page.projects.desc')} />
+    <div class="project-grid">
+      {publicProjects.map((project) => <ProjectCard project={project} locale={locale} />)}
+    </div>
+  </section>
+</Layout>

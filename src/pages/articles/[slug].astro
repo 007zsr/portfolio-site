@@ -1,0 +1,19 @@
+---
+import ArticleDetailPage from '../../page-views/ArticleDetailPage.astro';
+import { publicArticles, type Article } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return publicArticles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+---
+
+<ArticleDetailPage locale="zh" article={article} />

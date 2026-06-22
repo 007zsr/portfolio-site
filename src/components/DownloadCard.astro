@@ -1,31 +1,21 @@
 ---
-import type { Project } from '../lib/projects';
-
-type Download = {
-  id: string;
-  title: string;
-  category: string;
-  fileType: string;
-  size?: string;
-  version?: string;
-  updatedAt?: string;
-  projectId?: string;
-  sourceType: string;
-  url: string;
-  visibility: string;
-  featured?: boolean;
-};
+import { localizeDownload, type Download } from '../lib/downloads';
+import { localePath, t, type Locale } from '../lib/i18n';
+import { localizeProject, type Project } from '../lib/projects';
 
 interface Props {
   download: Download;
+  locale: Locale;
   project?: Project;
 }
 
-const { download, project } = Astro.props;
+const { download, locale, project } = Astro.props;
+const localizedDownload = localizeDownload(download, locale);
+const localizedProject = project ? localizeProject(project, locale) : undefined;
 const unavailable = !download.url || download.url === '#';
 const meta = [
   download.fileType,
-  download.size,
+  localizedDownload.size,
   download.version,
   download.updatedAt
 ].filter(Boolean);
@@ -33,14 +23,14 @@ const meta = [
 
 <article class="download-card">
   <div>
-    <p class="download-type">{download.category}</p>
-    <h3>{download.title}</h3>
+    <p class="download-type">{localizedDownload.category}</p>
+    <h3>{localizedDownload.title}</h3>
     <p class="download-meta">{meta.join(' · ')}</p>
-    <p class="download-source">Source: {download.sourceType.replaceAll('_', ' ')}</p>
+    <p class="download-source">{t(locale, 'common.source')}: {download.sourceType.replaceAll('_', ' ')}</p>
     {
-      project && (
-        <a class="inline-link" href={`/projects/${project.slug}`}>
-          Related project: {project.title}
+      project && localizedProject && (
+        <a class="inline-link" href={localePath(`/projects/${project.slug}`, locale)}>
+          {t(locale, 'common.relatedProject')}: {localizedProject.title}
         </a>
       )
     }
@@ -48,10 +38,10 @@ const meta = [
   <div class="download-actions">
     {
       unavailable ? (
-        <span class="button button-disabled">Coming soon</span>
+        <span class="button button-disabled">{t(locale, 'button.comingSoon')}</span>
       ) : (
         <a class="button" href={download.url} download={download.sourceType === 'local'}>
-          Open file
+          {t(locale, 'button.openFile')}
         </a>
       )
     }

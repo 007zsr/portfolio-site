@@ -1,0 +1,22 @@
+[
+  {
+    "id": "astro-docs",
+    "slug": "astro-docs",
+    "title": {
+      "zh": "Astro 官方文档",
+      "en": "Astro Documentation"
+    },
+    "summary": {
+      "zh": "Astro 静态网站框架的官方文档，用于查询路由、内容集合和部署方式。",
+      "en": "Official documentation for the Astro static site framework, including routing, content collections, and deployment."
+    },
+    "url": "https://docs.astro.build/",
+    "category": {
+      "zh": "技术文档",
+      "en": "Technical Documentation"
+    },
+    "tags": ["astro", "web"],
+    "visibility": "public",
+    "featured": true
+  }
+]

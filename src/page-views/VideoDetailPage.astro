@@ -1,0 +1,46 @@
+---
+import Layout from '../components/Layout.astro';
+import TechTag from '../components/TechTag.astro';
+import { localizeVideo, type Video } from '../lib/contentItems';
+import { localePath, t, type Locale } from '../lib/i18n';
+import { getProjectById, localizeProject } from '../lib/projects';
+
+interface Props {
+  locale: Locale;
+  video: Video;
+}
+
+const { locale, video } = Astro.props;
+const item = localizeVideo(video, locale);
+const project = video.relatedProjectId ? getProjectById(video.relatedProjectId) : undefined;
+const localizedProject = project ? localizeProject(project, locale) : undefined;
+---
+
+<Layout locale={locale} title={item.title} description={item.summary} type="article">
+  <section class="detail-hero">
+    <p class="eyebrow">{video.platform}</p>
+    <h1>{item.title}</h1>
+    <p class="lead">{item.summary}</p>
+    <div class="tag-list">
+      {video.tags.map((tag) => <TechTag label={tag} />)}
+    </div>
+  </section>
+  <div class="detail-layout">
+    <article class="detail-main">
+      <section class="info-panel">
+        <h2>{t(locale, 'nav.videos')}</h2>
+        <p>{item.summary}</p>
+      </section>
+    </article>
+    <aside class="detail-aside">
+      <section class="info-panel">
+        <h2>{t(locale, 'common.platform')}</h2>
+        <div class="meta-row"><span>{t(locale, 'common.date')}</span><span>{video.date}</span></div>
+        <div class="meta-row"><span>{t(locale, 'common.platform')}</span><span>{video.platform}</span></div>
+      </section>
+      {project && localizedProject && <a class="inline-link" href={localePath(`/projects/${project.slug}`, locale)}>{localizedProject.title}</a>}
+      {video.url === '#' ? <span class="button button-disabled">{t(locale, 'button.comingSoon')}</span> : <a class="button secondary" href={video.url}>{t(locale, 'button.watchVideo')}</a>}
+      <a class="inline-link" href={localePath('/videos', locale)}>{t(locale, 'nav.videos')}</a>
+    </aside>
+  </div>
+</Layout>

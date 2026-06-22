@@ -1,0 +1,13 @@
+---
+import { alternateLocalePath, t, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+const targetPath = alternateLocalePath(pathname);
+---
+
+<a class="language-switcher" href={targetPath}>{t(locale, 'language.switch')}</a>

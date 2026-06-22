@@ -1,0 +1,31 @@
+---
+import { localePath, t, type Locale } from '../lib/i18n';
+import { localizePaper, type Paper } from '../lib/contentItems';
+import TechTag from './TechTag.astro';
+
+interface Props {
+  paper: Paper;
+  locale: Locale;
+}
+
+const { paper, locale } = Astro.props;
+const item = localizePaper(paper, locale);
+---
+
+<article class="content-card paper-card">
+  <p class="download-type">{item.topic}</p>
+  <h3><a href={localePath(`/papers/${paper.slug}`, locale)}>{paper.title}</a></h3>
+  <p class="content-meta">{paper.authors.join(', ')} · {paper.year} · {paper.venue}</p>
+  <p>{item.summary}</p>
+  <div class="tag-list">
+    {paper.tags.map((tag) => <TechTag label={tag} />)}
+  </div>
+  <div class="button-row">
+    <a class="button secondary" href={paper.url === '#' ? localePath(`/papers/${paper.slug}`, locale) : paper.url}>
+      {t(locale, 'button.viewPaper')}
+    </a>
+    <a class="button secondary" href={localePath(`/papers/${paper.slug}`, locale)}>
+      {t(locale, 'button.readingNotes')}
+    </a>
+  </div>
+</article>

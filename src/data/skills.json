@@ -1,18 +1,30 @@
 [
   {
-    "group": "Programming",
+    "group": {
+      "zh": "编程与数据",
+      "en": "Programming"
+    },
     "items": ["Python", "TypeScript", "GDScript", "MATLAB", "JSON", "Markdown"]
   },
   {
-    "group": "AI and Robotics",
+    "group": {
+      "zh": "AI 与机器人",
+      "en": "AI and Robotics"
+    },
     "items": ["Whisper", "Command Planning", "Safety Controller", "YOLO", "Computer Vision"]
   },
   {
-    "group": "Simulation and Systems",
+    "group": {
+      "zh": "仿真与系统",
+      "en": "Simulation and Systems"
+    },
     "items": ["DVB-S", "DVB-S2", "BER Simulation", "Link Budget", "Mock Adapters"]
   },
   {
-    "group": "Web and Tools",
+    "group": {
+      "zh": "Web 与工具",
+      "en": "Web and Tools"
+    },
     "items": ["Astro", "GitHub", "Cloudflare Pages", "Static Site Deployment"]
   }
 ]

@@ -34,4 +34,30 @@ const projects = defineCollection({
   })
 });
 
-export const collections = { projects };
+const localizedText = z.object({
+  zh: z.string().optional(),
+  en: z.string().optional()
+});
+
+const articles = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/articles' }),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    title: localizedText,
+    summary: localizedText,
+    date: z.string(),
+    category: localizedText,
+    tags: z.array(z.string()).default([]),
+    visibility: z.string(),
+    featured: z.boolean().default(false),
+    languageStatus: z
+      .object({
+        zh: z.string().optional(),
+        en: z.string().optional()
+      })
+      .default({})
+  })
+});
+
+export const collections = { projects, articles };

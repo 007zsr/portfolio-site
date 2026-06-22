@@ -1,35 +1,82 @@
 ---
-import { siteConfig } from '../lib/site';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { localePath, t, type Locale } from '../lib/i18n';
+import { shortName } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/downloads', label: 'Downloads' },
-  { href: '/resume', label: 'Resume' },
-  { href: '/contact', label: 'Contact' }
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/about', labelKey: 'nav.about' },
+  { href: '/projects', labelKey: 'nav.projects' },
+  { href: '/downloads', labelKey: 'nav.downloads' },
+  { href: '/resume', labelKey: 'nav.resume' },
+  { href: '/contact', labelKey: 'nav.contact' }
 ];
 
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const contentLinks = [
+  { href: '/articles', labelKey: 'nav.articles' },
+  { href: '/papers', labelKey: 'nav.papers' },
+  { href: '/videos', labelKey: 'nav.videos' },
+  { href: '/links', labelKey: 'nav.links' }
+];
+
+const normalizedPath = pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) =>
-  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+  href === localePath('/', locale)
+    ? normalizedPath === href
+    : normalizedPath === href || normalizedPath.startsWith(`${href}/`);
+
+const localizedLinks = links.map((link) => ({
+  href: localePath(link.href, locale),
+  label: t(locale, link.labelKey)
+}));
+
+const localizedContentLinks = contentLinks.map((link) => ({
+  href: localePath(link.href, locale),
+  label: t(locale, link.labelKey)
+}));
+
+const contentActive = localizedContentLinks.some((link) => isActive(link.href));
 ---
 
 <header class="site-header">
-  <a class="brand" href="/" aria-label={`${siteConfig.siteName} home`}>
-    <span class="brand-mark" aria-hidden="true">SZ</span>
-    <span class="brand-text">{siteConfig.author}</span>
+  <a class="brand" href={localePath('/', locale)} aria-label={`${shortName(locale)} home`}>
+    <span class="brand-mark" aria-hidden="true">ZSR</span>
+    <span class="brand-text">{shortName(locale)}</span>
   </a>
   <nav class="primary-nav" aria-label="Primary navigation">
     {
-      links.map((link) => (
-        <a
-          class:list={['nav-link', { active: isActive(link.href) }]}
-          href={link.href}
-        >
+      localizedLinks.slice(0, 3).map((link) => (
+        <a class:list={['nav-link', { active: isActive(link.href) }]} href={link.href}>
           {link.label}
         </a>
       ))
     }
+    <div class:list={['nav-menu', { active: contentActive }]}>
+      <button class="nav-link nav-menu-trigger" type="button">{t(locale, 'nav.content')}</button>
+      <div class="nav-menu-list">
+        {
+          localizedContentLinks.map((link) => (
+            <a class:list={['nav-link', { active: isActive(link.href) }]} href={link.href}>
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    {
+      localizedLinks.slice(3).map((link) => (
+        <a class:list={['nav-link', { active: isActive(link.href) }]} href={link.href}>
+          {link.label}
+        </a>
+      ))
+    }
+    <LanguageSwitcher locale={locale} pathname={pathname} />
   </nav>
 </header>

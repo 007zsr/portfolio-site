@@ -1,0 +1,27 @@
+[
+  {
+    "id": "paper-demo-001",
+    "slug": "paper-demo-001",
+    "title": "Speech Command Interfaces for Mobile Robots",
+    "authors": ["Author A", "Author B"],
+    "year": 2024,
+    "venue": "Conference / Journal",
+    "topic": {
+      "zh": "机器人 / 语音识别",
+      "en": "Robotics / Speech Recognition"
+    },
+    "summary": {
+      "zh": "这是一条论文收藏示例，用于展示论文标题、作者、主题、摘要和外部链接。",
+      "en": "A placeholder paper entry showing title, authors, topic, summary, and external links."
+    },
+    "notes": {
+      "zh": "阅读笔记占位：后续可以记录方法、贡献、局限和可借鉴点。",
+      "en": "Reading note placeholder: methods, contributions, limits, and useful references can be added later."
+    },
+    "url": "#",
+    "pdfUrl": "#",
+    "tags": ["robotics", "asr"],
+    "visibility": "public",
+    "featured": true
+  }
+]

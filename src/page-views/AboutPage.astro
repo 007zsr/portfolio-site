@@ -1,0 +1,75 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import TechTag from '../components/TechTag.astro';
+import awards from '../data/awards.json';
+import profile from '../data/profile.json';
+import skills from '../data/skills.json';
+import { pick, t, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<Layout locale={locale} title={t(locale, 'page.about.title')} description={pick(profile.summary, locale)}>
+  <section class="page-section">
+    <SectionTitle eyebrow={t(locale, 'nav.about')} title={t(locale, 'page.about.desc')} description={pick(profile.summary, locale)} />
+    <div class="grid two">
+      <section class="info-panel">
+        <h3>{locale === 'zh' ? '教育背景' : 'Education'}</h3>
+        <ul class="plain-list">
+          {
+            profile.education.map((item) => (
+              <li>
+                <strong>{pick(item.school, locale)}</strong>
+                <p>{pick(item.degree, locale)}</p>
+                <p>{item.period}</p>
+                <p>{pick(item.details, locale)}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section class="info-panel">
+        <h3>{locale === 'zh' ? '项目兴趣' : 'Project Interests'}</h3>
+        <ul class="plain-list">
+          {profile.interests.map((interest) => <li>{pick(interest, locale)}</li>)}
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <section class="page-section tight">
+    <SectionTitle eyebrow={locale === 'zh' ? '技能' : 'Skills'} title={locale === 'zh' ? '技术工具箱' : 'Technical toolkit'} />
+    <div class="grid two">
+      {
+        skills.map((group) => (
+          <section class="info-panel">
+            <h3>{pick(group.group, locale)}</h3>
+            <div class="tag-list">
+              {group.items.map((skill) => <TechTag label={skill} />)}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="page-section tight">
+    <SectionTitle eyebrow={locale === 'zh' ? '经历' : 'Experience'} title={locale === 'zh' ? '奖项与记录' : 'Awards and notes'} />
+    <div class="grid two">
+      {
+        awards.map((award) => (
+          <article class="info-panel">
+            <h3>{pick(award.title, locale)}</h3>
+            <p>{pick(award.issuer, locale)} · {award.year}</p>
+            <p>{pick(award.description, locale)}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

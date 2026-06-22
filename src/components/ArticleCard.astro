@@ -1,0 +1,24 @@
+---
+import { localePath, t, type Locale } from '../lib/i18n';
+import { localizeArticle, type Article } from '../lib/articles';
+import TechTag from './TechTag.astro';
+
+interface Props {
+  article: Article;
+  locale: Locale;
+}
+
+const { article, locale } = Astro.props;
+const item = localizeArticle(article, locale);
+---
+
+<article class="content-card article-card">
+  <p class="download-type">{item.category}</p>
+  <h3><a href={localePath(`/articles/${article.slug}`, locale)}>{item.title}</a></h3>
+  <p class="content-meta">{item.date} · {item.languageStatus}</p>
+  <p>{item.summary}</p>
+  <div class="tag-list">
+    {article.tags.map((tag) => <TechTag label={tag} />)}
+  </div>
+  <a class="inline-link" href={localePath(`/articles/${article.slug}`, locale)}>{t(locale, 'button.readMore')}</a>
+</article>

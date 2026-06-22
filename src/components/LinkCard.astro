@@ -1,0 +1,23 @@
+---
+import { t, type Locale } from '../lib/i18n';
+import { localizeLink, type LinkItem } from '../lib/contentItems';
+import TechTag from './TechTag.astro';
+
+interface Props {
+  link: LinkItem;
+  locale: Locale;
+}
+
+const { link, locale } = Astro.props;
+const item = localizeLink(link, locale);
+---
+
+<article class="content-card link-card">
+  <p class="download-type">{item.category}</p>
+  <h3>{item.title}</h3>
+  <p>{item.summary}</p>
+  <div class="tag-list">
+    {link.tags.map((tag) => <TechTag label={tag} />)}
+  </div>
+  <a class="button secondary" href={link.url}>{t(locale, 'button.openLink')}</a>
+</article>

@@ -1,22 +1,55 @@
 {
   "name": "Sirui Zhou",
-  "headline": "Engineering portfolio focused on robotics control, communication systems, computer vision, and game prototypes.",
-  "location": "Australia",
-  "summary": "I build practical prototypes across robotics, AI, signal processing, and interactive systems. My work usually combines software engineering with applied engineering constraints: safety checks, data flow, simulation, interfaces, and deployable demos.",
+  "headline": {
+    "zh": "专注机器人控制、通信系统、计算机视觉与游戏原型的工程作品集。",
+    "en": "Engineering portfolio focused on robotics control, communication systems, computer vision, and game prototypes."
+  },
+  "location": {
+    "zh": "澳大利亚",
+    "en": "Australia"
+  },
+  "summary": {
+    "zh": "我关注能运行、能验证、能继续扩展的工程原型，方向包括机器人、AI、信号处理和交互系统。项目通常围绕安全检查、数据流、仿真、界面和可部署演示展开。",
+    "en": "I build practical prototypes across robotics, AI, signal processing, and interactive systems. My work usually combines software engineering with applied engineering constraints: safety checks, data flow, simulation, interfaces, and deployable demos."
+  },
   "education": [
     {
-      "school": "Engineering Program",
-      "degree": "Bachelor-level coursework and project work",
+      "school": {
+        "zh": "工程项目学习经历",
+        "en": "Engineering Program"
+      },
+      "degree": {
+        "zh": "本科阶段课程与项目实践",
+        "en": "Bachelor-level coursework and project work"
+      },
       "period": "2023 - 2026",
-      "details": "Focus areas include robotics, signal processing, computer vision, embedded-style control workflows, and software prototyping."
+      "details": {
+        "zh": "关注机器人、信号处理、计算机视觉、控制流程和软件原型开发。",
+        "en": "Focus areas include robotics, signal processing, computer vision, embedded-style control workflows, and software prototyping."
+      }
     }
   ],
   "interests": [
-    "Robotics command planning",
-    "Speech and text control interfaces",
-    "Satellite communication simulation",
-    "Computer vision model evaluation",
-    "Game systems and tool-driven UI"
+    {
+      "zh": "机器人命令规划",
+      "en": "Robotics command planning"
+    },
+    {
+      "zh": "语音与文本控制界面",
+      "en": "Speech and text control interfaces"
+    },
+    {
+      "zh": "卫星通信仿真",
+      "en": "Satellite communication simulation"
+    },
+    {
+      "zh": "计算机视觉模型评估",
+      "en": "Computer vision model evaluation"
+    },
+    {
+      "zh": "游戏系统与工具化 UI",
+      "en": "Game systems and tool-driven UI"
+    }
   ],
   "contact": {
     "email": "sirui.zhou@example.com",

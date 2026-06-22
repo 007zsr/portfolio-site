@@ -1,16 +1,22 @@
 ---
-import { siteConfig } from '../lib/site';
+import { t, type Locale } from '../lib/i18n';
+import { siteName } from '../lib/site';
 
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div>
-    <strong>{siteConfig.siteName}</strong>
-    <p>Robotics, communication systems, AI, and interactive prototypes.</p>
+    <strong>{siteName(locale)}</strong>
+    <p>{t(locale, 'footer.description')}</p>
   </div>
   <div class="footer-meta">
-    <span>© {year} {siteConfig.author}</span>
-    <span>Built as a static portfolio on Astro</span>
+    <span>© {year} Sirui Zhou</span>
+    <span>{t(locale, 'footer.built')}</span>
   </div>
 </footer>

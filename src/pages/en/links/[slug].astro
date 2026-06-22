@@ -1,0 +1,19 @@
+---
+import LinkDetailPage from '../../../page-views/LinkDetailPage.astro';
+import { publicLinks, type LinkItem } from '../../../lib/contentItems';
+
+export function getStaticPaths() {
+  return publicLinks.map((link) => ({
+    params: { slug: link.slug },
+    props: { link }
+  }));
+}
+
+interface Props {
+  link: LinkItem;
+}
+
+const { link } = Astro.props;
+---
+
+<LinkDetailPage locale="en" link={link} />

@@ -1,14 +1,15 @@
 ---
 import Layout from '../components/Layout.astro';
+import { t } from '../lib/i18n';
 ---
 
-<Layout title="Page not found" description="The requested page could not be found.">
+<Layout locale="zh" title={t('zh', 'page.notFound.title')} description={t('zh', 'page.notFound.desc')}>
   <section class="not-found">
     <div>
       <p class="eyebrow">404</p>
-      <h1>Page not found</h1>
-      <p class="lead">The page may have moved, or the project link may not exist yet.</p>
-      <a class="button" href="/">Back to home</a>
+      <h1>{t('zh', 'page.notFound.title')}</h1>
+      <p class="lead">{t('zh', 'page.notFound.desc')}</p>
+      <a class="button" href="/">{t('zh', 'button.backHome')}</a>
     </div>
   </section>
 </Layout>

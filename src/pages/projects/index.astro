@@ -1,22 +1,5 @@
 ---
-import Layout from '../../components/Layout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import SectionTitle from '../../components/SectionTitle.astro';
-import { publicProjects } from '../../lib/projects';
+import ProjectsPage from '../../page-views/ProjectsPage.astro';
 ---
 
-<Layout
-  title="Projects"
-  description="Public project portfolio covering robotics, communication systems, computer vision, and game prototypes."
->
-  <section class="page-section">
-    <SectionTitle
-      eyebrow="Projects"
-      title="Public project archive"
-      description="A curated archive of public work across software, simulation, and prototype systems."
-    />
-    <div class="project-grid">
-      {publicProjects.map((project) => <ProjectCard project={project} />)}
-    </div>
-  </section>
-</Layout>
+<ProjectsPage locale="zh" />

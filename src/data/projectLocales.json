@@ -1,0 +1,122 @@
+{
+  "unitree-go2-voice-control": {
+    "title": {
+      "zh": "Unitree Go2 语音控制系统",
+      "en": "Unitree Go2 Voice Control System"
+    },
+    "category": {
+      "zh": "毕业设计 / 机器人",
+      "en": "Thesis Project / Robotics"
+    },
+    "role": {
+      "zh": "主要开发者",
+      "en": "Main Developer"
+    },
+    "summary": {
+      "zh": "面向 Unitree Go2 机器狗的语音与文本控制原型，包含语音识别、语义解析、命令规划、安全检查、队列、Mock 执行和机器人适配层。",
+      "en": "A voice and text command prototype for a Unitree Go2 robot, designed around speech recognition, semantic parsing, command planning, safety checks, queueing, mock execution, and robot adapter layers."
+    },
+    "responsibilities": {
+      "zh": ["设计从用户输入到机器人动作的命令流程。", "构建安全检查和命令队列概念。", "将 Mock 执行与未来机器人适配层分离。"],
+      "en": ["Designed the command flow from user input to validated robot action.", "Built the safety and command queue concepts for safer execution.", "Separated mock execution from the future robot adapter."]
+    },
+    "features": {
+      "zh": ["语音与文本命令输入", "语义意图解析", "执行前安全校验", "本地 Mock 执行路径", "面向真实硬件的适配层"],
+      "en": ["Speech and text command input", "Semantic intent parsing", "Safety validation before command execution", "Mock execution path for local testing", "Adapter layer for future hardware integration"]
+    },
+    "outcomes": {
+      "zh": ["在真实机器人部署前建立了可测试的控制原型。", "明确了 UI、规划、安全和执行之间的系统边界。"],
+      "en": ["Created a testable control prototype before live robot deployment.", "Clarified system boundaries between UI, planning, safety, and execution."]
+    }
+  },
+  "dvb-s-dvb-s2-matlab": {
+    "title": {
+      "zh": "DVB-S / DVB-S2 MATLAB 通信系统仿真",
+      "en": "DVB-S / DVB-S2 MATLAB Communication System"
+    },
+    "category": {
+      "zh": "通信系统",
+      "en": "Communication System"
+    },
+    "role": {
+      "zh": "开发者",
+      "en": "Developer"
+    },
+    "summary": {
+      "zh": "基于 MATLAB 的卫星通信系统仿真项目，覆盖链路预算、调制编码、BER 仿真和 DVB-S / DVB-S2 性能分析。",
+      "en": "A MATLAB-based satellite communication simulation project covering link budget, modulation and coding, BER simulation, and performance analysis for DVB-S and DVB-S2 workflows."
+    },
+    "responsibilities": {
+      "zh": ["在 MATLAB 中实现仿真和分析流程。", "通过 BER 测试比较调制与编码选择。", "整理项目输出用于报告和展示。"],
+      "en": ["Implemented simulation and analysis workflows in MATLAB.", "Compared modulation and coding choices through BER-oriented tests.", "Prepared project outputs for reporting and review."]
+    },
+    "features": {
+      "zh": ["链路预算计算", "调制与编码仿真", "BER 性能分析", "结果可视化"],
+      "en": ["Link budget calculation", "Modulation and coding simulation", "BER performance analysis", "Result visualization"]
+    },
+    "outcomes": {
+      "zh": ["完成了可复现的通信系统仿真流程。", "产出了适合技术报告使用的分析材料。"],
+      "en": ["Completed a reproducible communication-system simulation workflow.", "Produced analysis material suitable for technical reporting."]
+    }
+  },
+  "tomato-yolo-detection": {
+    "title": {
+      "zh": "基于 YOLO 的番茄病虫害检测",
+      "en": "Tomato Disease and Pest Detection using YOLO"
+    },
+    "category": {
+      "zh": "AI / 计算机视觉",
+      "en": "AI / Computer Vision"
+    },
+    "role": {
+      "zh": "开发者",
+      "en": "Developer"
+    },
+    "summary": {
+      "zh": "使用 YOLO 模型进行番茄病虫害目标检测，包含训练流程、检测结果查看和可视化展示。",
+      "en": "A YOLO-based object detection project for tomato disease and pest recognition, including model training, detection result review, and visual output presentation."
+    },
+    "responsibilities": {
+      "zh": ["准备检测实验的模型流程。", "查看训练输出和检测可视化。", "整理项目结果用于展示。"],
+      "en": ["Prepared the model workflow for detection experiments.", "Reviewed training outputs and detection visualizations.", "Organized project results for presentation."]
+    },
+    "features": {
+      "zh": ["目标检测流程", "病虫害类别识别", "训练结果可视化", "检测输出查看"],
+      "en": ["Object detection workflow", "Disease and pest category recognition", "Training result visualization", "Detection output review"]
+    },
+    "outcomes": {
+      "zh": ["展示了农业检测方向的应用型计算机视觉流程。", "形成了可继续扩展的作品集项目文档。"],
+      "en": ["Demonstrated an applied computer-vision workflow for agricultural inspection.", "Built portfolio-ready project documentation for future expansion."]
+    }
+  },
+  "godot-game-prototype": {
+    "title": {
+      "zh": "GAME-1-DND Godot 游戏原型",
+      "en": "GAME-1-DND Godot Game Prototype"
+    },
+    "category": {
+      "zh": "游戏原型",
+      "en": "Game Prototype"
+    },
+    "role": {
+      "zh": "开发者",
+      "en": "Developer"
+    },
+    "summary": {
+      "zh": "基于 Godot 的游戏原型，包含角色创建、背包、装备、技能、敌人 AI、对话、宝箱、世界选择和场景流程系统。",
+      "en": "A Godot game prototype with character creation, inventory, equipment, skills, enemy AI, dialogue, chests, world selection, and scene-flow systems."
+    },
+    "responsibilities": {
+      "zh": ["在 Godot 中实现核心玩法和 UI 系统。", "整理场景流程和可复用交互模式。", "通过本地原型测试验证玩法功能。"],
+      "en": ["Implemented core gameplay and UI systems in Godot.", "Organized scene flow and reusable interaction patterns.", "Validated gameplay features through local prototype testing."]
+    },
+    "features": {
+      "zh": ["角色创建流程", "背包与装备系统", "技能和交互 UI", "敌人 AI 与对话原型", "世界选择和场景切换"],
+      "en": ["Character creation flow", "Inventory and equipment systems", "Skill and interaction UI", "Enemy AI and dialogue prototypes", "World selection and scene transitions"]
+    },
+    "outcomes": {
+      "zh": ["创建了可逐步扩展的游戏系统原型。", "为后续玩法实验搭建了可复用系统。"],
+      "en": ["Created a broad game-system prototype that can be expanded feature by feature.", "Built reusable systems for future gameplay experiments."]
+    }
+  }
+}

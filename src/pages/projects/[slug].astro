@@ -1,11 +1,6 @@
 ---
-import Layout from '../../components/Layout.astro';
-import DownloadCard from '../../components/DownloadCard.astro';
-import SectionTitle from '../../components/SectionTitle.astro';
-import StatusBadge from '../../components/StatusBadge.astro';
-import TechTag from '../../components/TechTag.astro';
-import downloads from '../../data/downloads.json';
-import { getProjectById, publicProjects, type Project } from '../../lib/projects';
+import ProjectDetailPage from '../../page-views/ProjectDetailPage.astro';
+import { publicProjects, type Project } from '../../lib/projects';
 
 export function getStaticPaths() {
   return publicProjects.map((project) => ({
@@ -19,99 +14,6 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const Content = project.Content;
-const relatedDownloads = downloads.filter(
-  (download) =>
-    download.visibility === 'public' &&
-    (download.projectId === project.id || project.downloads.includes(download.id))
-);
 ---
 
-<Layout title={project.title} description={project.summary} image={project.image} type="article">
-  <section class="detail-hero">
-    <p class="eyebrow">{project.category}</p>
-    <h1>{project.title}</h1>
-    <p class="lead">{project.summary}</p>
-    <div class="tag-list">
-      <StatusBadge status={project.status} />
-      {project.technologies.map((tech) => <TechTag label={tech} />)}
-    </div>
-  </section>
-
-  <div class="detail-layout">
-    <article class="detail-main">
-      <img src={project.image} alt={project.imageAlt} />
-
-      {project.responsibilities.length > 0 && (
-        <section class="info-panel">
-          <h2>My responsibilities</h2>
-          <ul class="plain-list">
-            {project.responsibilities.map((item) => <li>{item}</li>)}
-          </ul>
-        </section>
-      )}
-
-      {project.features.length > 0 && (
-        <section class="info-panel">
-          <h2>Main features</h2>
-          <ul class="plain-list">
-            {project.features.map((item) => <li>{item}</li>)}
-          </ul>
-        </section>
-      )}
-
-      {project.outcomes.length > 0 && (
-        <section class="info-panel">
-          <h2>Outcomes</h2>
-          <ul class="plain-list">
-            {project.outcomes.map((item) => <li>{item}</li>)}
-          </ul>
-        </section>
-      )}
-
-      <section class="info-panel project-body">
-        <Content />
-      </section>
-
-      {relatedDownloads.length > 0 && (
-        <section>
-          <SectionTitle title="Related downloads" />
-          <div class="grid">
-            {
-              relatedDownloads.map((download) => (
-                <DownloadCard download={download} project={getProjectById(download.projectId ?? '')} />
-              ))
-            }
-          </div>
-        </section>
-      )}
-    </article>
-
-    <aside class="detail-aside">
-      <section class="info-panel">
-        <h2>Project facts</h2>
-        <div class="meta-row"><span>Year</span><span>{project.year}</span></div>
-        <div class="meta-row"><span>Role</span><span>{project.role}</span></div>
-        <div class="meta-row"><span>Status</span><span>{project.status}</span></div>
-        <div class="meta-row"><span>Type</span><span>{project.category}</span></div>
-      </section>
-
-      {project.links.length > 0 && (
-        <section class="info-panel">
-          <h2>Links</h2>
-          <div class="button-row">
-            {
-              project.links.map((link) =>
-                link.url === '#' ? (
-                  <span class="button button-disabled">{link.label}</span>
-                ) : (
-                  <a class="button secondary" href={link.url}>{link.label}</a>
-                )
-              )
-            }
-          </div>
-        </section>
-      )}
-    </aside>
-  </div>
-</Layout>
+<ProjectDetailPage locale="zh" project={project} />

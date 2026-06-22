@@ -1,12 +1,26 @@
 {
-  "siteName": "ZSR365 | Sirui Zhou Portfolio",
-  "shortName": "ZSR365",
+  "defaultLocale": "zh",
+  "locales": ["zh", "en"],
+  "siteName": {
+    "zh": "ZSR365 | 周 Sirui 的个人网站",
+    "en": "ZSR365 | Sirui Zhou Portfolio"
+  },
+  "shortName": {
+    "zh": "ZSR365",
+    "en": "ZSR365"
+  },
+  "siteDescription": {
+    "zh": "周 Sirui 的个人作品集网站，展示项目、文章、论文收藏、视频和下载资料。",
+    "en": "Personal portfolio website of Sirui Zhou, featuring projects, articles, papers, videos, and downloads."
+  },
   "siteUrl": "https://www.zsr365.com",
   "temporaryUrl": "https://portfolio-site-2fx.pages.dev",
   "rootDomain": "https://zsr365.com",
   "cloudflareProjectName": "portfolio-site",
   "author": "Sirui Zhou",
-  "description": "Personal portfolio for robotics, communication systems, computer vision, and game prototype projects.",
-  "locale": "en_US",
+  "ogLocale": {
+    "zh": "zh_CN",
+    "en": "en_US"
+  },
   "defaultImage": "/images/site/hero-portfolio.png"
 }

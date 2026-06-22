@@ -1,14 +1,32 @@
 [
   {
-    "title": "Project Portfolio Development",
-    "issuer": "Personal Engineering Work",
+    "title": {
+      "zh": "个人作品集建设",
+      "en": "Project Portfolio Development"
+    },
+    "issuer": {
+      "zh": "个人工程项目",
+      "en": "Personal Engineering Work"
+    },
     "year": "2026",
-    "description": "Consolidated robotics, communication, AI, and game prototype work into a public portfolio."
+    "description": {
+      "zh": "将机器人、通信、AI 和游戏原型项目整理为可公开访问的作品集。",
+      "en": "Consolidated robotics, communication, AI, and game prototype work into a public portfolio."
+    }
   },
   {
-    "title": "Applied Prototype Experience",
-    "issuer": "Course and independent projects",
+    "title": {
+      "zh": "应用型原型经验",
+      "en": "Applied Prototype Experience"
+    },
+    "issuer": {
+      "zh": "课程与独立项目",
+      "en": "Course and independent projects"
+    },
     "year": "2025 - 2026",
-    "description": "Built simulation, detection, and interaction prototypes with documented workflows and outcomes."
+    "description": {
+      "zh": "构建过仿真、检测和交互类原型，并整理了对应流程和结果。",
+      "en": "Built simulation, detection, and interaction prototypes with documented workflows and outcomes."
+    }
   }
 ]

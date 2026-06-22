@@ -1,29 +1,34 @@
 ---
-import type { Project } from '../lib/projects';
+import { localePath, t, type Locale } from '../lib/i18n';
+import { localizeProject, type Project } from '../lib/projects';
 import StatusBadge from './StatusBadge.astro';
 import TechTag from './TechTag.astro';
 
 interface Props {
   project: Project;
+  locale: Locale;
   compact?: boolean;
 }
 
-const { project, compact = false } = Astro.props;
+const { project, locale, compact = false } = Astro.props;
+const localizedProject = localizeProject(project, locale);
+const projectHref = localePath(`/projects/${project.slug}`, locale);
 ---
 
 <article class:list={['project-card', { compact }]}>
-  <a class="project-media" href={`/projects/${project.slug}`} aria-label={`Open ${project.title}`}>
-    <img src={project.image} alt={project.imageAlt} loading="lazy" />
+  <a class="project-media" href={projectHref} aria-label={localizedProject.title}>
+    <img src={project.image} alt={localizedProject.imageAlt} loading="lazy" />
   </a>
   <div class="project-card-body">
     <div class="project-card-topline">
-      <span>{project.category}</span>
-      <StatusBadge status={project.status} />
+      <span>{localizedProject.category}</span>
+      <StatusBadge status={localizedProject.status} />
     </div>
-    <h3><a href={`/projects/${project.slug}`}>{project.title}</a></h3>
-    <p>{project.summary}</p>
-    <div class="tag-list" aria-label={`${project.title} technologies`}>
+    <h3><a href={projectHref}>{localizedProject.title}</a></h3>
+    <p>{localizedProject.summary}</p>
+    <div class="tag-list" aria-label={`${localizedProject.title} technologies`}>
       {project.technologies.slice(0, compact ? 4 : 6).map((tech) => <TechTag label={tech} />)}
     </div>
+    <a class="inline-link" href={projectHref}>{t(locale, 'button.viewProject')}</a>
   </div>
 </article>
