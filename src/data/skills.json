@@ -1,0 +1,18 @@
+[
+  {
+    "group": "Programming",
+    "items": ["Python", "TypeScript", "GDScript", "MATLAB", "JSON", "Markdown"]
+  },
+  {
+    "group": "AI and Robotics",
+    "items": ["Whisper", "Command Planning", "Safety Controller", "YOLO", "Computer Vision"]
+  },
+  {
+    "group": "Simulation and Systems",
+    "items": ["DVB-S", "DVB-S2", "BER Simulation", "Link Budget", "Mock Adapters"]
+  },
+  {
+    "group": "Web and Tools",
+    "items": ["Astro", "GitHub", "Cloudflare Pages", "Static Site Deployment"]
+  }
+]

@@ -1,0 +1,59 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import profile from '../data/profile.json';
+import { siteConfig } from '../lib/site';
+
+const contacts = [
+  {
+    label: 'Email',
+    value: profile.contact.email,
+    href: `mailto:${profile.contact.email}`
+  },
+  {
+    label: 'GitHub',
+    value: profile.contact.github,
+    href: profile.contact.github
+  },
+  {
+    label: 'LinkedIn',
+    value: 'Placeholder',
+    href: profile.contact.linkedin
+  },
+  {
+    label: 'Website',
+    value: siteConfig.temporaryUrl,
+    href: siteConfig.temporaryUrl
+  }
+];
+---
+
+<Layout
+  title="Contact"
+  description="Contact links for Sirui Zhou including email, GitHub, LinkedIn placeholder, and planned website domain."
+>
+  <section class="page-section">
+    <SectionTitle
+      eyebrow="Contact"
+      title="Project and collaboration links"
+      description="Reach out through the public channels listed below."
+    />
+
+    <div class="grid two">
+      {
+        contacts.map((item) => (
+          <article class="contact-card">
+            <h3>{item.label}</h3>
+            {
+              item.href === '#' ? (
+                <p>{item.value}</p>
+              ) : (
+                <a class="inline-link" href={item.href}>{item.value}</a>
+              )
+            }
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

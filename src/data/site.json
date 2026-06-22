@@ -1,0 +1,11 @@
+{
+  "siteName": "Sirui Zhou Portfolio",
+  "siteUrl": "https://www.zsr365.com",
+  "temporaryUrl": "https://portfolio-site.pages.dev",
+  "rootDomain": "https://zsr365.com",
+  "cloudflareProjectName": "portfolio-site",
+  "author": "Sirui Zhou",
+  "description": "Personal portfolio for robotics, communication systems, computer vision, and game prototype projects.",
+  "locale": "en_US",
+  "defaultImage": "/images/site/hero-portfolio.png"
+}

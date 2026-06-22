@@ -1,0 +1,29 @@
+---
+import type { Project } from '../lib/projects';
+import StatusBadge from './StatusBadge.astro';
+import TechTag from './TechTag.astro';
+
+interface Props {
+  project: Project;
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+---
+
+<article class:list={['project-card', { compact }]}>
+  <a class="project-media" href={`/projects/${project.slug}`} aria-label={`Open ${project.title}`}>
+    <img src={project.image} alt={project.imageAlt} loading="lazy" />
+  </a>
+  <div class="project-card-body">
+    <div class="project-card-topline">
+      <span>{project.category}</span>
+      <StatusBadge status={project.status} />
+    </div>
+    <h3><a href={`/projects/${project.slug}`}>{project.title}</a></h3>
+    <p>{project.summary}</p>
+    <div class="tag-list" aria-label={`${project.title} technologies`}>
+      {project.technologies.slice(0, compact ? 4 : 6).map((tech) => <TechTag label={tech} />)}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,59 @@
+---
+import type { Project } from '../lib/projects';
+
+type Download = {
+  id: string;
+  title: string;
+  category: string;
+  fileType: string;
+  size?: string;
+  version?: string;
+  updatedAt?: string;
+  projectId?: string;
+  sourceType: string;
+  url: string;
+  visibility: string;
+  featured?: boolean;
+};
+
+interface Props {
+  download: Download;
+  project?: Project;
+}
+
+const { download, project } = Astro.props;
+const unavailable = !download.url || download.url === '#';
+const meta = [
+  download.fileType,
+  download.size,
+  download.version,
+  download.updatedAt
+].filter(Boolean);
+---
+
+<article class="download-card">
+  <div>
+    <p class="download-type">{download.category}</p>
+    <h3>{download.title}</h3>
+    <p class="download-meta">{meta.join(' · ')}</p>
+    <p class="download-source">Source: {download.sourceType.replaceAll('_', ' ')}</p>
+    {
+      project && (
+        <a class="inline-link" href={`/projects/${project.slug}`}>
+          Related project: {project.title}
+        </a>
+      )
+    }
+  </div>
+  <div class="download-actions">
+    {
+      unavailable ? (
+        <span class="button button-disabled">Coming soon</span>
+      ) : (
+        <a class="button" href={download.url} download={download.sourceType === 'local'}>
+          Open file
+        </a>
+      )
+    }
+  </div>
+</article>

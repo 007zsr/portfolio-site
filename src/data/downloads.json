@@ -1,0 +1,43 @@
+[
+  {
+    "id": "resume-en-v1",
+    "title": "Resume PDF",
+    "category": "Resume / CV",
+    "fileType": "PDF",
+    "size": "Unknown",
+    "version": "v1",
+    "updatedAt": "2026-06",
+    "sourceType": "local",
+    "url": "/files/resume-placeholder.pdf",
+    "visibility": "public",
+    "featured": true
+  },
+  {
+    "id": "unitree-demo-v1",
+    "title": "Unitree Go2 Voice Control Demo",
+    "category": "Project Demos",
+    "fileType": "ZIP",
+    "size": "External",
+    "version": "v1",
+    "updatedAt": "2026-06",
+    "projectId": "unitree-go2-voice-control",
+    "sourceType": "github_release",
+    "url": "#",
+    "visibility": "public",
+    "featured": true
+  },
+  {
+    "id": "godot-game-repo",
+    "title": "GAME-1-DND GitHub Repository",
+    "category": "Code Archives",
+    "fileType": "GitHub",
+    "size": "External",
+    "version": "main",
+    "updatedAt": "2026-06",
+    "projectId": "godot-game-prototype",
+    "sourceType": "github_repo",
+    "url": "#",
+    "visibility": "public",
+    "featured": false
+  }
+]

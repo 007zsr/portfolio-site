@@ -1,0 +1,26 @@
+{
+  "name": "Sirui Zhou",
+  "headline": "Engineering portfolio focused on robotics control, communication systems, computer vision, and game prototypes.",
+  "location": "Australia",
+  "summary": "I build practical prototypes across robotics, AI, signal processing, and interactive systems. My work usually combines software engineering with applied engineering constraints: safety checks, data flow, simulation, interfaces, and deployable demos.",
+  "education": [
+    {
+      "school": "Engineering Program",
+      "degree": "Bachelor-level coursework and project work",
+      "period": "2023 - 2026",
+      "details": "Focus areas include robotics, signal processing, computer vision, embedded-style control workflows, and software prototyping."
+    }
+  ],
+  "interests": [
+    "Robotics command planning",
+    "Speech and text control interfaces",
+    "Satellite communication simulation",
+    "Computer vision model evaluation",
+    "Game systems and tool-driven UI"
+  ],
+  "contact": {
+    "email": "sirui.zhou@example.com",
+    "github": "https://github.com/007zsr",
+    "linkedin": "#"
+  }
+}
