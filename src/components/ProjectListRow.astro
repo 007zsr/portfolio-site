@@ -6,9 +6,19 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const primaryLink = project.links[0];
 ---
 
-<article class="project-list-row">
-  <h3>{project.title}</h3>
-  <span>{project.year}</span>
-</article>
+{
+  primaryLink ? (
+    <a class="project-list-row" href={primaryLink.href} target={primaryLink.external ? '_blank' : undefined} rel={primaryLink.external ? 'noreferrer' : undefined}>
+      <h3>{project.title}</h3>
+      <span>{project.year}</span>
+    </a>
+  ) : (
+    <article class="project-list-row">
+      <h3>{project.title}</h3>
+      <span>{project.year}</span>
+    </article>
+  )
+}
