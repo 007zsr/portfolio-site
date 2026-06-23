@@ -2,16 +2,24 @@
   "defaultLocale": "zh",
   "locales": ["zh", "en"],
   "siteName": {
-    "zh": "ZSR365 | 周 Sirui 的个人网站",
-    "en": "ZSR365 | Sirui Zhou Portfolio"
+    "zh": "周 Sirui 的项目作品集",
+    "en": "Sirui Zhou Portfolio"
   },
   "shortName": {
     "zh": "ZSR365",
     "en": "ZSR365"
   },
   "siteDescription": {
-    "zh": "周 Sirui 的个人作品集网站，展示工程项目、个人简介和联系方式。",
-    "en": "Personal portfolio website of Sirui Zhou, featuring engineering projects, profile, and contact channels."
+    "zh": "机器人、通信系统、AI 与交互原型项目展示。",
+    "en": "Projects in robotics, communication systems, AI, and interactive prototyping."
+  },
+  "homeTitle": {
+    "zh": "周 Sirui 的项目作品集",
+    "en": "Sirui Zhou Portfolio"
+  },
+  "homeSubtitle": {
+    "zh": "机器人、通信系统、AI 与交互原型项目展示。",
+    "en": "Projects in robotics, communication systems, AI, and interactive prototyping."
   },
   "siteUrl": "https://www.zsr365.com",
   "temporaryUrl": "https://portfolio-site-2fx.pages.dev",

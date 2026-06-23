@@ -2,7 +2,7 @@ import type { Locale, LocalizedText } from '../lib/i18n';
 
 export type { Locale, LocalizedText };
 
-export type RouteKey = 'home' | 'about' | 'projects' | 'contact' | 'notFound';
+export type RouteKey = 'home' | 'projects' | 'contact' | 'notFound';
 
 export interface SiteDisplayConfig {
   name: string;
@@ -49,8 +49,6 @@ export interface HomeContent {
   title: string;
   headline: string;
   summary: string;
-  focusLabel: string;
-  focusTags: string[];
   heroImage: string;
   actions: ActionLink[];
   featuredTitle: string;
@@ -62,42 +60,13 @@ export interface ProjectsContent {
   eyebrow: string;
   title: string;
   description: string;
-  projects: ProjectSummary[];
-}
-
-export interface EducationItem {
-  school: string;
-  degree: string;
-  period: string;
-  details: string;
-}
-
-export interface SkillGroup {
-  group: string;
-  items: string[];
-}
-
-export interface ExperienceItem {
-  title: string;
-  issuer: string;
-  year: string;
-  description: string;
-}
-
-export interface AboutContent {
-  eyebrow: string;
-  title: string;
-  description: string;
-  educationTitle: string;
-  interestsTitle: string;
-  skillsEyebrow: string;
-  skillsTitle: string;
-  experienceEyebrow: string;
-  experienceTitle: string;
-  education: EducationItem[];
-  interests: string[];
-  skills: SkillGroup[];
-  experience: ExperienceItem[];
+  featuredTitle: string;
+  featuredDescription: string;
+  carouselLabel: string;
+  otherTitle: string;
+  otherEmptyText: string;
+  featuredProjects: ProjectSummary[];
+  otherProjects: ProjectSummary[];
 }
 
 export interface ContactItem {

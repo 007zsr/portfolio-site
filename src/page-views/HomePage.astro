@@ -2,7 +2,6 @@
 import Layout from '../components/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import TechTag from '../components/TechTag.astro';
 import { getHomeContent, getSeoMeta } from '../lib/content-api';
 import type { Locale } from '../lib/i18n';
 
@@ -23,9 +22,6 @@ const heroStyle = `--hero-image: url('${home.heroImage}')`;
         <p class="eyebrow">{home.eyebrow}</p>
         <h1>{home.title}</h1>
         <p>{home.headline}</p>
-        <div class="tag-list" aria-label={home.focusLabel}>
-          {home.focusTags.map((tag) => <TechTag label={tag} />)}
-        </div>
         <div class="hero-actions">
           {
             home.actions.map((action) => (

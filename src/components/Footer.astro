@@ -11,14 +11,7 @@ const footer = getFooterContent(locale);
 ---
 
 <footer class="site-footer">
-  <div>
-    <strong>{footer.siteName}</strong>
-    <p>{footer.description}</p>
-  </div>
-  <div class="footer-meta">
-    <div class="footer-links">
-      {footer.links.map((link) => <a class="inline-link" href={link.href}>{link.label}</a>)}
-    </div>
-    <span>© {footer.year} Sirui Zhou</span>
-  </div>
+  <nav class="footer-links" aria-label="Footer links">
+    {footer.links.map((link) => <a class="inline-link" href={link.href}>{link.label}</a>)}
+  </nav>
 </footer>

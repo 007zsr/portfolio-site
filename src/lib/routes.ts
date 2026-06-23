@@ -9,7 +9,6 @@ type PrimaryRoute = {
 
 export const primaryRoutes: PrimaryRoute[] = [
   { key: 'home', path: '/', labelKey: 'nav.home' },
-  { key: 'about', path: '/about', labelKey: 'nav.about' },
   { key: 'projects', path: '/projects', labelKey: 'nav.projects' },
   { key: 'contact', path: '/contact', labelKey: 'nav.contact' }
 ];

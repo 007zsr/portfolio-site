@@ -1,0 +1,109 @@
+---
+import type { ProjectSummary } from '../types/content';
+import StatusBadge from './StatusBadge.astro';
+import TechTag from './TechTag.astro';
+
+interface Props {
+  projects: ProjectSummary[];
+  label: string;
+}
+
+const { projects, label } = Astro.props;
+const carouselId = `featured-projects-${projects.map((project) => project.id).join('-') || 'empty'}`;
+---
+
+{
+  projects.length > 0 && (
+    <section class="featured-carousel" id={carouselId} data-carousel data-interval="5000" aria-label={label}>
+      <div class="featured-carousel-track">
+        {
+          projects.map((project, index) => (
+            <article class:list={['featured-slide', { active: index === 0 }]} data-slide aria-hidden={index === 0 ? 'false' : 'true'}>
+              <div class="featured-slide-copy">
+                <div class="project-card-topline">
+                  <span>{project.year}</span>
+                  <StatusBadge status={project.status} />
+                </div>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <div class="tag-list" aria-label={project.technologiesLabel}>
+                  {project.technologies.slice(0, 6).map((tech) => <TechTag label={tech} />)}
+                </div>
+                {
+                  project.links.length > 0 && (
+                    <div class="project-card-actions">
+                      {
+                        project.links.map((link) => (
+                          <a class="button secondary" href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>
+                            {link.label}
+                          </a>
+                        ))
+                      }
+                    </div>
+                  )
+                }
+              </div>
+              <div class="featured-slide-media">
+                <img src={project.image} alt={project.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      {
+        projects.length > 1 && (
+          <div class="carousel-dots" aria-label={label}>
+            {
+              projects.map((project, index) => (
+                <button
+                  class:list={['carousel-dot', { active: index === 0 }]}
+                  type="button"
+                  data-slide-target={index}
+                  aria-label={`${index + 1}. ${project.title}`}
+                  aria-pressed={index === 0 ? 'true' : 'false'}
+                />
+              ))
+            }
+          </div>
+        )
+      }
+    </section>
+  )
+}
+
+<script is:inline>
+  (() => {
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+      const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
+      const dots = Array.from(carousel.querySelectorAll('[data-slide-target]'));
+      const interval = Number(carousel.getAttribute('data-interval') || 5000);
+      let current = 0;
+
+      if (slides.length <= 1) return;
+
+      const setSlide = (nextIndex) => {
+        current = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, index) => {
+          const active = index === current;
+          slide.classList.toggle('active', active);
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+        dots.forEach((dot, index) => {
+          const active = index === current;
+          dot.classList.toggle('active', active);
+          dot.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+      };
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          setSlide(Number(dot.getAttribute('data-slide-target') || 0));
+        });
+      });
+
+      window.setInterval(() => {
+        setSlide(current + 1);
+      }, interval);
+    });
+  })();
+</script>

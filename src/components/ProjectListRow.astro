@@ -1,0 +1,14 @@
+---
+import type { ProjectSummary } from '../types/content';
+
+interface Props {
+  project: ProjectSummary;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-list-row">
+  <h3>{project.title}</h3>
+  <span>{project.year}</span>
+</article>

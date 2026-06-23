@@ -1,6 +1,7 @@
 ---
+import FeaturedProjectCarousel from '../components/FeaturedProjectCarousel.astro';
 import Layout from '../components/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectListRow from '../components/ProjectListRow.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { getProjectsContent, getSeoMeta } from '../lib/content-api';
 import type { Locale } from '../lib/i18n';
@@ -17,8 +18,23 @@ const seo = getSeoMeta('projects', locale);
 <Layout locale={locale} title={seo.title} description={seo.description}>
   <section class="page-section">
     <SectionTitle eyebrow={content.eyebrow} title={content.title} description={content.description} />
-    <div class="project-grid">
-      {content.projects.map((project) => <ProjectCard project={project} />)}
+    <div class="project-page-stack">
+      <section class="project-featured-section" aria-label={content.featuredTitle}>
+        <SectionTitle title={content.featuredTitle} description={content.featuredDescription} />
+        <FeaturedProjectCarousel projects={content.featuredProjects} label={content.carouselLabel} />
+      </section>
+      <section class="project-list-section" aria-label={content.otherTitle}>
+        <SectionTitle title={content.otherTitle} />
+        {
+          content.otherProjects.length > 0 ? (
+            <div class="project-list">
+              {content.otherProjects.map((project) => <ProjectListRow project={project} />)}
+            </div>
+          ) : (
+            <p class="empty-state">{content.otherEmptyText}</p>
+          )
+        }
+      </section>
     </div>
   </section>
 </Layout>

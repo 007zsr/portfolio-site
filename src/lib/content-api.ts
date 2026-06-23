@@ -1,9 +1,6 @@
-import awards from '../data/awards.json';
 import profile from '../data/profile.json';
 import siteData from '../data/site.json';
-import skills from '../data/skills.json';
 import type {
-  AboutContent,
   ActionLink,
   ContactContent,
   HomeContent,
@@ -87,28 +84,39 @@ export function getProjects(locale: Locale): ProjectSummary[] {
   return publicProjects.map((project) => toProjectSummary(project, locale));
 }
 
+export function getFeaturedProjects(locale: Locale, limit = 3): ProjectSummary[] {
+  return featuredProjects.slice(0, limit).map((project) => toProjectSummary(project, locale));
+}
+
+export function getOtherProjects(locale: Locale, featuredLimit = 3): ProjectSummary[] {
+  const featuredIds = new Set(featuredProjects.slice(0, featuredLimit).map((project) => project.id));
+  return publicProjects
+    .filter((project) => !featuredIds.has(project.id))
+    .map((project) => toProjectSummary(project, locale));
+}
+
 export function getProjectsContent(locale: Locale): ProjectsContent {
   return {
     eyebrow: t(locale, 'nav.projects'),
     title: t(locale, 'page.projects.title'),
     description: t(locale, 'page.projects.desc'),
-    projects: getProjects(locale)
+    featuredTitle: t(locale, 'page.projects.featured'),
+    featuredDescription: t(locale, 'page.projects.featuredDesc'),
+    carouselLabel: t(locale, 'page.projects.carouselLabel'),
+    otherTitle: t(locale, 'page.projects.other'),
+    otherEmptyText: t(locale, 'page.projects.otherEmpty'),
+    featuredProjects: getFeaturedProjects(locale, 3),
+    otherProjects: getOtherProjects(locale, 3)
   };
-}
-
-export function getFeaturedProjects(locale: Locale): ProjectSummary[] {
-  return featuredProjects.map((project) => toProjectSummary(project, locale));
 }
 
 export function getHomeContent(locale: Locale): HomeContent {
   const site = getSiteConfig(locale);
   return {
     eyebrow: t(locale, 'page.home.eyebrow'),
-    title: profile.name,
-    headline: pick(profile.headline, locale),
-    summary: pick(profile.summary, locale),
-    focusLabel: locale === 'zh' ? '技术方向' : 'Technical focus areas',
-    focusTags: skills.flatMap((group) => group.items).slice(0, 8),
+    title: pick(siteData.homeTitle, locale),
+    headline: pick(siteData.homeSubtitle, locale),
+    summary: site.description,
     heroImage: site.defaultImage,
     actions: [
       {
@@ -125,37 +133,6 @@ export function getHomeContent(locale: Locale): HomeContent {
     featuredTitle: t(locale, 'page.home.featured'),
     featuredDescription: t(locale, 'page.home.featuredDesc'),
     featuredProjects: getFeaturedProjects(locale)
-  };
-}
-
-export function getAboutContent(locale: Locale): AboutContent {
-  return {
-    eyebrow: t(locale, 'nav.about'),
-    title: t(locale, 'page.about.desc'),
-    description: pick(profile.summary, locale),
-    educationTitle: locale === 'zh' ? '教育背景' : 'Education',
-    interestsTitle: locale === 'zh' ? '项目兴趣' : 'Project Interests',
-    skillsEyebrow: locale === 'zh' ? '技能' : 'Skills',
-    skillsTitle: locale === 'zh' ? '技术工具箱' : 'Technical Toolkit',
-    experienceEyebrow: locale === 'zh' ? '经历' : 'Experience',
-    experienceTitle: locale === 'zh' ? '奖项与记录' : 'Awards and Notes',
-    education: profile.education.map((item) => ({
-      school: pick(item.school, locale),
-      degree: pick(item.degree, locale),
-      period: item.period,
-      details: pick(item.details, locale)
-    })),
-    interests: profile.interests.map((item) => pick(item, locale)),
-    skills: skills.map((group) => ({
-      group: pick(group.group, locale),
-      items: group.items
-    })),
-    experience: awards.map((item) => ({
-      title: pick(item.title, locale),
-      issuer: pick(item.issuer, locale),
-      year: item.year,
-      description: pick(item.description, locale)
-    }))
   };
 }
 
@@ -198,9 +175,6 @@ export function getContactContent(locale: Locale): ContactContent {
 export function getFooterContent(locale: Locale) {
   const contact = getContactContent(locale);
   return {
-    siteName: siteName(locale),
-    description: t(locale, 'footer.description'),
-    year: new Date().getFullYear(),
     links: contact.items.filter((item) => item.label === 'Email' || item.label === 'GitHub')
   };
 }
@@ -210,11 +184,6 @@ export function getSeoMeta(route: RouteKey, locale: Locale): SeoMeta {
   const routeMeta: Record<RouteKey, SeoMeta> = {
     home: {
       description: site.description,
-      image: site.defaultImage
-    },
-    about: {
-      title: t(locale, 'page.about.title'),
-      description: pick(profile.summary, locale),
       image: site.defaultImage
     },
     projects: {
