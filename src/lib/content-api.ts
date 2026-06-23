@@ -97,14 +97,9 @@ export function getOtherProjects(locale: Locale, featuredLimit = 3): ProjectSumm
 
 export function getProjectsContent(locale: Locale): ProjectsContent {
   return {
-    eyebrow: t(locale, 'nav.projects'),
-    title: t(locale, 'page.projects.title'),
-    description: t(locale, 'page.projects.desc'),
-    featuredTitle: t(locale, 'page.projects.featured'),
-    featuredDescription: t(locale, 'page.projects.featuredDesc'),
     carouselLabel: t(locale, 'page.projects.carouselLabel'),
-    otherTitle: t(locale, 'page.projects.other'),
-    otherEmptyText: t(locale, 'page.projects.otherEmpty'),
+    listLabel: t(locale, 'page.projects.listLabel'),
+    listEmptyText: t(locale, 'page.projects.listEmpty'),
     featuredProjects: getFeaturedProjects(locale, 3),
     otherProjects: getOtherProjects(locale, 3)
   };
@@ -143,6 +138,11 @@ export function getContactContent(locale: Locale): ContactContent {
       label: 'Email',
       value: profile.contact.email,
       href: `mailto:${profile.contact.email}`
+    },
+    {
+      label: 'QQ Email',
+      value: profile.contact.secondaryEmail,
+      href: `mailto:${profile.contact.secondaryEmail}`
     },
     {
       label: 'GitHub',

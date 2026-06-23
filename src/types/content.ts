@@ -57,14 +57,9 @@ export interface HomeContent {
 }
 
 export interface ProjectsContent {
-  eyebrow: string;
-  title: string;
-  description: string;
-  featuredTitle: string;
-  featuredDescription: string;
   carouselLabel: string;
-  otherTitle: string;
-  otherEmptyText: string;
+  listLabel: string;
+  listEmptyText: string;
   featuredProjects: ProjectSummary[];
   otherProjects: ProjectSummary[];
 }
